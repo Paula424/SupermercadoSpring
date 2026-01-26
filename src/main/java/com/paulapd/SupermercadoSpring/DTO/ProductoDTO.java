@@ -1,4 +1,4 @@
 package com.paulapd.SupermercadoSpring.DTO;
 
-public class ProductoDTO {
+public record ProductoDTO() {
 }

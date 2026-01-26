@@ -1,4 +1,4 @@
 package com.paulapd.SupermercadoSpring.DTO;
 
-public class ClienteDTO {
-}
+public record ClienteDTO (){}
+
