@@ -1,17 +1,22 @@
 package com.paulapd.SupermercadoSpring.entidades;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
-public class Categoria {
+public class DetalleVenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoria;
+    private Long idDetalle;
 
-    private String nombre;
+    private int cantidad;
 
-    private String descipcion;
+    private double precioUnitario;
+
+    private double subTotal;
+
+    //Hacer relaciones id_venta
+
+    //Hacer relaciones id_producto
+
 }
