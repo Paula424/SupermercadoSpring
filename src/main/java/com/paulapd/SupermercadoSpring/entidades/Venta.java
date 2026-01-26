@@ -15,6 +15,6 @@ public class Venta {
     private double total;
     private String metodoPago;
 
-    //Relaciones con id_cleinte.
+    //Relaciones con id_clinte.
 
 }
