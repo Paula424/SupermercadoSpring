@@ -1,4 +1,4 @@
-package com.paulapd.SupermercadoSpring.Controller;
+package com.paulapd.SupermercadoSpring.controller;
 
 import org.springframework.stereotype.Controller;
 
