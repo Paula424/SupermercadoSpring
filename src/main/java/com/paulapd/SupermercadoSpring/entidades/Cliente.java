@@ -26,7 +26,7 @@ public class Cliente {
 
     private String direccion;
 
-    private LocalDateTime fecha_registro;
+    private LocalDateTime fechaRegistro;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Venta> ventasCli = new ArrayList<>();

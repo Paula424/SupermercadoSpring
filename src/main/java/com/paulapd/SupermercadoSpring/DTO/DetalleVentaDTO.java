@@ -1,4 +1,14 @@
 package com.paulapd.SupermercadoSpring.DTO;
 
-public record DetalleVentaDTO (){
+import com.paulapd.SupermercadoSpring.entidades.Producto;
+import com.paulapd.SupermercadoSpring.entidades.Venta;
+
+public record DetalleVentaDTO (
+        Long idDetalle,
+        int cantidad,
+        double precioUnitario,
+        double subtotal,
+        Producto idProducto,
+        Venta idVenta
+){
 }

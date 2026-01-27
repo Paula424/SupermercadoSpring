@@ -16,7 +16,7 @@ public class Categoria {
 
     private String nombre;
 
-    private String descipcion;
+    private String descripcion;
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Producto> productos = new ArrayList<>();
