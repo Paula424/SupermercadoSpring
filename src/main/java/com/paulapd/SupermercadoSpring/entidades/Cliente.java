@@ -5,6 +5,8 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,6 +27,9 @@ public class Cliente {
     private String direccion;
 
     private LocalDateTime fecha_registro;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Venta> ventasCli = new ArrayList<>();
 
 
 }

@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name = "producto")
@@ -18,5 +23,14 @@ public class Producto {
     private int stock;
     private String marca;
 
-    //Relaciones id_categoria
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleVenta> detalleVentas = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "productosSet") //el nombre de productos en ventas.
+    private Set<Venta> ventaSet = new HashSet<>();
+
 }

@@ -17,8 +17,11 @@ public class DetalleVenta {
 
     private double subTotal;
 
-    //Hacer relaciones id_venta
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
-    //Hacer relaciones id_producto
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "venta_id")
+    private Venta venta;
 }
