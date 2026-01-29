@@ -23,14 +23,13 @@ public class Producto {
     private int stock;
     private String marca;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "producto")
     private List<DetalleVenta> detalleVentas = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "productosSet") //el nombre de productos en ventas.
-    private Set<Venta> ventaSet = new HashSet<>();
+//el ManyToMany, no hay7 que ponerlo en el programa ya que en el programa tenemos una entidad intermedia DetalleVenta.
 
 }

@@ -2,7 +2,6 @@ package com.paulapd.SupermercadoSpring.entidades;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class Cliente {
 
     private LocalDateTime fechaRegistro;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente")
     private List<Venta> ventasCli = new ArrayList<>();
 
 

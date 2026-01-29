@@ -18,6 +18,6 @@ public class Categoria {
 
     private String descripcion;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "categoria")
     private List<Producto> productos = new ArrayList<>();
 }

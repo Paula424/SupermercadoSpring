@@ -15,13 +15,18 @@ public class DetalleVenta {
 
     private double precioUnitario;
 
-    private double subTotal;
+   // private double subTotal;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "producto_id")
+    @ManyToOne
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "venta_id")
+    @ManyToOne
+    @JoinColumn(name = "venta_id", nullable = false)
     private Venta venta;
+
+    //Método calculado
+    public double getSubTotal(){
+        return cantidad * precioUnitario;
+    }
 }

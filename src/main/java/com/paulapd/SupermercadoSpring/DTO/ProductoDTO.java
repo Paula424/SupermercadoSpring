@@ -11,6 +11,6 @@ public record ProductoDTO(
     double precio,
     int stock,
     String marca,
-    Long categoria_id
+    Long categoriaId
     ) {
 }

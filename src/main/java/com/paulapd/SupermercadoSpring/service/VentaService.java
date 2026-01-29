@@ -1,7 +1,8 @@
 package com.paulapd.SupermercadoSpring.service;
 
-import com.paulapd.SupermercadoSpring.DTO.VentaDTO;
+import com.paulapd.SupermercadoSpring.DTO.VentaCreateDTO;
+import com.paulapd.SupermercadoSpring.DTO.VentaResponseDTO;
 
 public interface VentaService {
-    VentaDTO crearVenta(VentaDTO ventaDTO);
+    VentaResponseDTO crearVenta(VentaCreateDTO dto);
 }
