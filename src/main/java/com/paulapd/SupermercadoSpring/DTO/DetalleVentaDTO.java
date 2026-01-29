@@ -8,7 +8,6 @@ public record DetalleVentaDTO (
         int cantidad,
         double precioUnitario,
         double subtotal,
-        Producto idProducto,
-        Venta idVenta
+        Long idProducto
 ){
 }

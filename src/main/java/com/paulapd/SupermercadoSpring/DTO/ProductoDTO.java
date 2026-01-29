@@ -8,9 +8,9 @@ public record ProductoDTO(
     Long idProducto,
     String nombre,
     String descripcion,
+    double precio,
     int stock,
     String marca,
-    Categoria categoria_id,
-    Set<VentaDTO> ventaDTOSet
+    Long categoria_id
     ) {
 }

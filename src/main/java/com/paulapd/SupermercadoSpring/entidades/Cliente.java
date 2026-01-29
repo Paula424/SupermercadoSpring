@@ -20,7 +20,7 @@ public class Cliente {
 
     private String dni;
 
-    private Integer telefono;
+    private String telefono;
 
     private String correo;
 
