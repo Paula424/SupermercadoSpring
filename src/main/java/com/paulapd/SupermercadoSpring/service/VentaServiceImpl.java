@@ -3,6 +3,7 @@ package com.paulapd.SupermercadoSpring.service;
 import com.paulapd.SupermercadoSpring.DTO.DetalleVentaDTO;
 import com.paulapd.SupermercadoSpring.DTO.VentaCreateDTO;
 import com.paulapd.SupermercadoSpring.DTO.VentaResponseDTO;
+import com.paulapd.SupermercadoSpring.Mapper.VentaMapper;
 import com.paulapd.SupermercadoSpring.entidades.Cliente;
 import com.paulapd.SupermercadoSpring.entidades.DetalleVenta;
 import com.paulapd.SupermercadoSpring.entidades.Producto;

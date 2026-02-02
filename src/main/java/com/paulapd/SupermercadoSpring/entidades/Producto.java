@@ -30,6 +30,6 @@ public class Producto {
     @OneToMany(mappedBy = "producto")
     private List<DetalleVenta> detalleVentas = new ArrayList<>();
 
-//el ManyToMany, no hay7 que ponerlo en el programa ya que en el programa tenemos una entidad intermedia DetalleVenta.
+//el ManyToMany, no hay que ponerlo en el programa ya que en el programa tenemos una entidad intermedia DetalleVenta.
 
 }
