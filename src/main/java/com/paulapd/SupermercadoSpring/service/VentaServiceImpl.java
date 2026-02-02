@@ -41,9 +41,9 @@ public class VentaServiceImpl implements VentaService {
         //Crear Venta
         Venta venta = new Venta();
         venta.setCliente(cliente);
-        LocalDateTime ahora = LocalDateTime.now();
-        venta.setFechaInicio(ahora); //empieza la venta
-        venta.setFechaFin(ahora);//si ya está confirmada, se marca fin
+//        LocalDateTime ahora = LocalDateTime.now();
+        venta.setFechaInicio(LocalDateTime.now()); //empieza la venta
+//        venta.setFechaFin(ahora);//si ya está confirmada, se marca fin
         venta.setMetodoPago(dto.metodoPago());
 
         double total = 0;
@@ -51,9 +51,9 @@ public class VentaServiceImpl implements VentaService {
 
         //Procesar detalles.
         for (DetalleVentaDTO detDto : dto.detalleVentaDTOS()) {
-            if (detDto.cantidad() <=0){
-                throw new RuntimeException(("La cantidad debe ser mayor que 0"));
-            }
+//            if (detDto.cantidad() <=0){
+//                throw new RuntimeException(("La cantidad debe ser mayor que 0"));
+//            }
             Producto producto = productoRepositorio.findById(detDto.idProducto())
                     .orElseThrow(() -> new RuntimeException("El Producto no existe"));
 
@@ -72,76 +72,79 @@ public class VentaServiceImpl implements VentaService {
             detalleVenta.setPrecioUnitario(producto.getPrecio());
             detalleVenta.setVenta(venta);
 
-            double subtotal = detDto.cantidad() * producto.getPrecio();
-            total += subtotal;
-            detalles.add(detalleVenta);
+            venta.getDetallesVentas().add(detalleVenta);
+//            double subtotal = detDto.cantidad() * producto.getPrecio();
+//            total += subtotal;
+//            detalles.add(detalleVenta);
+            total += detalleVenta.getSubTotal();
         }
 
-        venta.setDetallesVentas(detalles);
+//        venta.setDetallesVentas(detalles);
         venta.setTotal(total);
+        venta.setFechaFin(LocalDateTime.now());
 
         Venta ventaGuardada = ventaRepositorio.save(venta);
         return VentaMapper.toResponseDTO(ventaGuardada);
     }
 
-    public boolean validarDescuento(double descuento){
-        if(descuento ==null){
-            return true; //descuento es opcional (puede ser null o 0)
-        }
-
-        if (descuento.compareTo(double.ZERO) <0 || descuento.compareTo(new double("100")) >0){
-            System.err.println("ERROR: El descuento debe estar entre 0% y 100% ");
-            return false;
-        }
-        return true;
-    }
-
-    public boolean validarPrecio(double precioRecomendado, double precioVenta){
-        if (precioRecomendado == null || pecioVenta == null){
-            System.err.println("ERROR: Los precios no pueden ser nulos");
-            return false;
-        }
-
-        // Calcular el rango permitido (±20%)
-        double margen = new double("0.20");
-        double precioMin = precioRecomendado.multiply(double.ONE.subtract(margen));
-        double precioMax = precioRecomendado.multiply(double.ONE.add(margen));
-
-        if (precioVenta.compareTo(precioMin) < 0 || precioVenta.compareTo(precioMax) > 0) {
-            System.err.println("Error: El precio de venta debe estar entre " + precioMin + "€ y " + precioMax + "€");
-            System.err.println("   (±20% del precio recomendado: " + precioRecomendado + "€)");
-            return false;
-        }
-
-        return true;
-    }
-
-    //Obtiene todas las ventas
-    public List<Venta> obtenerTodas(){
-        return ventasService.obtenerTodas();
-    }
-
-    //Busca una venta por su codigo.
-    public  Venta buscarPorCodigo(int codVenta){
-        return ventasService.buscarPorCodigo(codVenta);
-    }
-
-    //Obtiene todas las ventas de un cliente.
-    public List<Venta> obtenerPorCliente(String dniCli){
-        return ventasService.obtenerPorCliente(dniCli);
-    }
-
-    //Obtiene las ventas en un rango de fechas.
-    public List<Venta> obtenerPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin){
-        retrun ventasService.obtenerPorFecha(fechaInicio, fechaFin);
-    }
-
-    //ELimina una venta y todos sus detalles.
-    public boolean eliminarVenta(int codVenta){
-        //Primero eliminar los detalles
-        detalleVentaService.eliminarPorVenta(codVenta);
-
-        //Luego eliminar la venta
-        return ventasService.eliminar(codVenta);
-    }
+//    public boolean validarDescuento(double descuento){
+//        if(descuento ==null){
+//            return true; //descuento es opcional (puede ser null o 0)
+//        }
+//
+//        if (descuento.compareTo(double.ZERO) <0 || descuento.compareTo(new double("100")) >0){
+//            System.err.println("ERROR: El descuento debe estar entre 0% y 100% ");
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public boolean validarPrecio(double precioRecomendado, double precioVenta){
+//        if (precioRecomendado == null || pecioVenta == null){
+//            System.err.println("ERROR: Los precios no pueden ser nulos");
+//            return false;
+//        }
+//
+//        // Calcular el rango permitido (±20%)
+//        double margen = new double("0.20");
+//        double precioMin = precioRecomendado.multiply(double.ONE.subtract(margen));
+//        double precioMax = precioRecomendado.multiply(double.ONE.add(margen));
+//
+//        if (precioVenta.compareTo(precioMin) < 0 || precioVenta.compareTo(precioMax) > 0) {
+//            System.err.println("Error: El precio de venta debe estar entre " + precioMin + "€ y " + precioMax + "€");
+//            System.err.println("   (±20% del precio recomendado: " + precioRecomendado + "€)");
+//            return false;
+//        }
+//
+//        return true;
+//    }
+//
+//    //Obtiene todas las ventas
+//    public List<Venta> obtenerTodas(){
+//        return ventasService.obtenerTodas();
+//    }
+//
+//    //Busca una venta por su codigo.
+//    public  Venta buscarPorCodigo(int codVenta){
+//        return ventasService.buscarPorCodigo(codVenta);
+//    }
+//
+//    //Obtiene todas las ventas de un cliente.
+//    public List<Venta> obtenerPorCliente(String dniCli){
+//        return ventasService.obtenerPorCliente(dniCli);
+//    }
+//
+//    //Obtiene las ventas en un rango de fechas.
+//    public List<Venta> obtenerPorFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+//        retrun ventasService.obtenerPorFecha(fechaInicio, fechaFin);
+//    }
+//
+//    //ELimina una venta y todos sus detalles.
+//    public boolean eliminarVenta(int codVenta){
+//        //Primero eliminar los detalles
+//        detalleVentaService.eliminarPorVenta(codVenta);
+//
+//        //Luego eliminar la venta
+//        return ventasService.eliminar(codVenta);
+//    }
 }

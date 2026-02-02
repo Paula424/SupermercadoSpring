@@ -27,7 +27,7 @@ public class Venta {
 
 //el ManyToMany, no hay7 que ponerlo en el programa ya que en el programa tenemos una entidad intermedia DetalleVenta.
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 }
