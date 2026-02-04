@@ -1,6 +1,6 @@
 package com.paulapd.SupermercadoSpring.service;
 
-import com.paulapd.SupermercadoSpring.DTO.ClienteDTO;
+import com.paulapd.SupermercadoSpring.dto.ClienteDTO;
 import com.paulapd.SupermercadoSpring.entidades.Cliente;
 
 import java.util.List;

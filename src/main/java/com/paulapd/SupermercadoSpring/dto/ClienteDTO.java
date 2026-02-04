@@ -1,6 +1,6 @@
-package com.paulapd.SupermercadoSpring.DTO;
+package com.paulapd.SupermercadoSpring.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record ClienteDTO (
         Long idCliente,
@@ -10,6 +10,6 @@ public record ClienteDTO (
         String telefono,
         String correo,
         String direccion,
-        LocalDateTime fechaRegistro
+        LocalDate fechaRegistro
 ){}
 

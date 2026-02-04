@@ -1,8 +1,4 @@
-package com.paulapd.SupermercadoSpring.DTO;
-
-import com.paulapd.SupermercadoSpring.entidades.Categoria;
-
-import java.util.Set;
+package com.paulapd.SupermercadoSpring.dto;
 
 public record ProductoDTO(
     Long idProducto,

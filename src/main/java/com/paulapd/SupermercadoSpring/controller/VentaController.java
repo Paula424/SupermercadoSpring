@@ -1,20 +1,18 @@
 package com.paulapd.SupermercadoSpring.controller;
 
-import com.paulapd.SupermercadoSpring.DTO.VentaCreateDTO;
-import com.paulapd.SupermercadoSpring.DTO.VentaResponseDTO;
+import com.paulapd.SupermercadoSpring.dto.VentaCreateDTO;
+import com.paulapd.SupermercadoSpring.dto.VentaResponseDTO;
 import com.paulapd.SupermercadoSpring.service.VentaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
-@RequestMapping("/ventas")
-@RequiredArgsConstructor
+@RequestMapping("/api/ventas")
 public class VentaController {
 
     private final VentaService ventaService;
@@ -24,9 +22,21 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<VentaResponseDTO> crear(@RequestBody VentaCreateDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ventaService.crearVenta(dto));
+    public ResponseEntity<VentaResponseDTO> crearVenta(@RequestBody VentaCreateDTO dto){
+        return new ResponseEntity<>(ventaService.crearVenta(dto), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public Page<VentaResponseDTO> listarVentas(Pageable pageable){
+        return ventaService.listarVentas(pageable);
+    }
+
+    @GetMapping("/cliente/{id}")
+    public Page<VentaResponseDTO> listarPorCliente(
+            @PathVariable Long id,
+            Pageable pageable
+    ){
+        return ventaService.listarVentasPorCliente(id, pageable);
     }
 }
-}
+

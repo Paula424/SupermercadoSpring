@@ -1,6 +1,7 @@
-package com.paulapd.SupermercadoSpring.Mapper;
+package com.paulapd.SupermercadoSpring.mapper;
 
-import com.paulapd.SupermercadoSpring.DTO.ClienteDTO;
+
+import com.paulapd.SupermercadoSpring.dto.ClienteDTO;
 import com.paulapd.SupermercadoSpring.entidades.Cliente;
 
 public class ClienteMapper {

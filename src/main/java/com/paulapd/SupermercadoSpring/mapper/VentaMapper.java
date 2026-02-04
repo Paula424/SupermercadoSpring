@@ -1,8 +1,8 @@
-package com.paulapd.SupermercadoSpring.Mapper;
+package com.paulapd.SupermercadoSpring.mapper;
 
-import com.paulapd.SupermercadoSpring.DTO.ClienteDTO;
-import com.paulapd.SupermercadoSpring.DTO.DetalleVentaDTO;
-import com.paulapd.SupermercadoSpring.DTO.VentaResponseDTO;
+import com.paulapd.SupermercadoSpring.dto.ClienteDTO;
+import com.paulapd.SupermercadoSpring.dto.DetalleVentaDTO;
+import com.paulapd.SupermercadoSpring.dto.VentaResponseDTO;
 import com.paulapd.SupermercadoSpring.entidades.Venta;
 
 import java.util.List;

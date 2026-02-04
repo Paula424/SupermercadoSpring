@@ -1,4 +1,4 @@
-package com.paulapd.SupermercadoSpring.DTO;
+package com.paulapd.SupermercadoSpring.dto;
 
 
 public record CategoriaDTO(

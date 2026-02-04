@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DetalleVentaServiceImpl {
+public class DetalleVentaServiceImpl implements DetalleVentaService {
     private final DetalleVentaRepositorio detalleVentaRepositorio;
     private final ProductoService productoService;
 
-    public DetalleVentaServiceImpl(){
-        this.detalleVentaRepositorio
+    public DetalleVentaServiceImpl(DetalleVentaRepositorio detalleVentaRepositorio, ProductoService productoService){
+        this.detalleVentaRepositorio = detalleVentaRepositorio;
+        this.productoService = productoService;
     }
 
     //Validar que la cantidad sea mayor que 0.
@@ -26,57 +27,53 @@ public class DetalleVentaServiceImpl {
 
     //Validar que el precio unitario sea mayor que 0.
     public boolean validarPrecio(double precioUnitario){
-        if (precioUnitario==null||precioUnitario.compareTo(double.ZERO)<=0){
-            System.err.println("ERROR: El precio unitario, tiene que ser mayor que 0");
-            return false;
-        }
-        return true;
+        return precioUnitario > 0;
     }
 
     //Inserta un nuevo detalle de venta tras validar los datos.
-    public boolean insertarDetalle(DetalleVenta detalleVenta){
+    public DetalleVenta insertarDetalle(DetalleVenta detalleVenta){
         //Validar cantidad
-        if(!ValidarCantidad(detalleVenta.getCantidad())){
-            return false;
+        if(!validarCantidad(detalleVenta.getCantidad())){
+            throw new RuntimeException("La cantidad debe ser mayor que 0");
         }
 
-        //Validar precioUnitario.
         if(!validarPrecio(detalleVenta.getPrecioUnitario())){
-            return false;
+            throw new RuntimeException("El precio unitario debe ser mayor que 0");
         }
 
-        //Verificar que el producto exista
-        if (!productoService.exixteProducto(detalleVenta.getProducto())){
-            System.err.println("ERROR: El producto "+detalleVenta.getProducto()+ " no existe");
-            return false;
+        if (!productoService.existeProducto(detalleVenta.getProducto().getIdProducto())){
+            throw new RuntimeException("El producto no existe");
         }
 
         //Si todo esta bien
-        return detalleVentaService.insertar(detalleVenta);
+        return detalleVentaRepositorio.save(detalleVenta);
     }
 
     //Obtenemos todos los detalles de una venta específica.
-    public List<DetalleVenta> obtenerPorVenta(int codVenta){return detalleVenta.obtenerPorVenta(codVenta); }
+    public List<DetalleVenta> obtenerPorVenta(Long idVenta){
+        return detalleVentaRepositorio.findByVenta_IdVenta(idVenta);
+    }
 
     //Eliminamos detalle de una venta.
-    public boolean eliminarPorVenta(int codVenta){
-        return detalleVenta.eliminarPorVenta(codVenta);
+    public void eliminarPorVenta(Long idVenta){
+        detalleVentaRepositorio.deleteByVenta_IdVenta(idVenta);
     }
 
     //Busca un detalle específico por su ID.
-    public DetalleVenta buscraPorId(int id){
-        return detalleVenta.buscarPorId(id);
+    public DetalleVenta buscarPorId(Long id){
+        return detalleVentaRepositorio.findById(id)
+                .orElseThrow(()-> new RuntimeException("Detalle no encontrado"));
     }
 
     //Calcular importe toral de todos los detalles de una venta.
-    public double calcularTotalVenta(int codVenta){
-        List<DetalleVenta> detalleVentas = obtenerPorVenta(codVenta);
-        double total = double.ZERO;
 
-        for( DetalleVenta detalleVenta : detalleVentas){
-            total = total.add(detalleVenta.calcularImporteLinea());
+    public double calcularTotalVenta(Long idVenta){
+        List<DetalleVenta> detalles = obtenerPorVenta(idVenta);
+        double total = 0;
+
+        for (DetalleVenta d : detalles){
+            total += d.getSubTotal();
         }
-
         return total;
     }
 }

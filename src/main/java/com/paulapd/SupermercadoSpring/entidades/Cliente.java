@@ -3,6 +3,7 @@ package com.paulapd.SupermercadoSpring.entidades;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Cliente {
 
     private String direccion;
 
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
     @OneToMany(mappedBy = "cliente")
     private List<Venta> ventasCli = new ArrayList<>();
