@@ -1,5 +1,6 @@
 package com.paulapd.SupermercadoSpring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,6 +29,7 @@ public class Cliente {
 
     private LocalDate fechaRegistro;
 
+    @JsonIgnoreProperties("cliente")
     @OneToMany(mappedBy = "cliente")
     private List<Venta> ventasCli = new ArrayList<>();
 

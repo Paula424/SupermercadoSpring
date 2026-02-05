@@ -1,5 +1,6 @@
 package com.paulapd.SupermercadoSpring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jdk.jfr.Enabled;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Producto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @JsonIgnoreProperties("producto")
     @OneToMany(mappedBy = "producto")
     private List<DetalleVenta> detalleVentas = new ArrayList<>();
 

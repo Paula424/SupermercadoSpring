@@ -56,9 +56,9 @@ public class VentaServiceImpl implements VentaService {
 
         //Procesar detalles.
         for (DetalleVentaDTO detDto : dto.detalleVentaDTOS()) {
-//            if (detDto.cantidad() <=0){
-//                throw new RuntimeException(("La cantidad debe ser mayor que 0"));
-//            }
+            if (detDto.cantidad() <=0){
+                throw new RuntimeException(("La cantidad debe ser mayor que 0"));
+            }
             Producto producto = productoRepositorio.findById(detDto.idProducto())
                     .orElseThrow(() -> new RuntimeException("El Producto no existe"));
 

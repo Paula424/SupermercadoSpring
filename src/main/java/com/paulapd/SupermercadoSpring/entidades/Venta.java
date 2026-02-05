@@ -1,5 +1,6 @@
 package com.paulapd.SupermercadoSpring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,8 +26,9 @@ public class Venta {
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleVenta> detallesVentas = new ArrayList<>();
 
-//el ManyToMany, no hay7 que ponerlo en el programa ya que en el programa tenemos una entidad intermedia DetalleVenta.
+//el ManyToMany, no hay que ponerlo en el programa ya que en el programa tenemos una entidad intermedia DetalleVenta.
 
+    @JsonIgnoreProperties("ventasCli")
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
